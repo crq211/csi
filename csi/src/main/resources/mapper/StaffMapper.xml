@@ -1,0 +1,447 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.company.csi.mapper.StaffMapper">
+    <resultMap id="BaseResultMap" type="com.company.csi.pojo.Staff">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="staff_name" jdbcType="VARCHAR" property="staffName"/>
+        <result column="id_number" jdbcType="VARCHAR" property="idNumber"/>
+        <result column="gender" jdbcType="CHAR" property="gender"/>
+        <result column="position_id" jdbcType="INTEGER" property="positionId"/>
+        <result column="department_id" jdbcType="INTEGER" property="departmentId"/>
+        <result column="education" jdbcType="VARCHAR" property="education"/>
+        <result column="email" jdbcType="VARCHAR" property="email"/>
+        <result column="phone" jdbcType="VARCHAR" property="phone"/>
+        <result column="qq_number" jdbcType="VARCHAR" property="qqNumber"/>
+        <result column="address" jdbcType="VARCHAR" property="address"/>
+        <result column="post" jdbcType="VARCHAR" property="post"/>
+        <result column="birth_date" jdbcType="VARCHAR" property="birthDate"/>
+        <result column="nation" jdbcType="VARCHAR" property="nation"/>
+        <result column="major" jdbcType="VARCHAR" property="major"/>
+        <result column="hobby" jdbcType="VARCHAR" property="hobby"/>
+        <result column="remark" jdbcType="VARCHAR" property="remark"/>
+        <result column="create_date" jdbcType="TIMESTAMP" property="createDate"/>
+    </resultMap>
+    <sql id="Example_Where_Clause">
+        <where>
+            <foreach collection="oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" prefixOverrides="and" suffix=")">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach close=")" collection="criterion.value" item="listItem" open="("
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <sql id="Update_By_Example_Where_Clause">
+        <where>
+            <foreach collection="example.oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" prefixOverrides="and" suffix=")">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach close=")" collection="criterion.value" item="listItem" open="("
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <sql id="Base_Column_List">
+    id, staff_name, id_number, gender, position_id, department_id, education, email,
+    phone, qq_number, address, post, birth_date, nation, major, hobby, remark, create_date
+  </sql>
+
+    <!-- 自己写的多条件查询 -->
+    <select id="selectBy" resultType="com.company.csi.pojo.Staff">
+        SELECT id, staff_name, gender, phone, email, department_id,
+        education, id_number, position_id, address, create_date FROM staff
+        <where>
+            <if test="positionId != 0">
+                AND position_id = #{positionId,jdbcType=INTEGER}
+            </if>
+            <if test="departmentId != 0">
+                AND department_id = #{departmentId,jdbcType=INTEGER}
+            </if>
+            <if test="staffName!=null and staffName != '' ">
+                AND staff_name LIKE "%"#{staffName,jdbcType=VARCHAR}"%"
+            </if>
+            <if test="idNumber!=null and idNumber != '' ">
+                AND id_number LIKE "%"#{idNumber,jdbcType=VARCHAR}"%"
+            </if>
+            <if test="gender!=null and gender != '' ">
+                AND gender LIKE "%"#{gender,jdbcType=CHAR}"%"
+            </if>
+            <if test="phone!=null and phone != '' ">
+                AND phone LIKE "%"#{phone,jdbcType=VARCHAR}"%"
+            </if>
+        </where>
+    </select>
+
+    <select id="selectByExample" parameterType="com.company.csi.pojo.StaffExample" resultMap="BaseResultMap">
+        select
+        <if test="distinct">
+            distinct
+        </if>
+        <include refid="Base_Column_List"/>
+        from staff
+        <if test="_parameter != null ">
+            <include refid="Example_Where_Clause"/>
+        </if>
+        <if test="orderByClause != null">
+            order by ${orderByClause}
+        </if>
+    </select>
+
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from staff
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from staff
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+    <delete id="deleteByExample" parameterType="com.company.csi.pojo.StaffExample">
+        delete from staff
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </delete>
+    <insert id="insert" parameterType="com.company.csi.pojo.Staff">
+    insert into staff (id, staff_name, id_number, 
+      gender, position_id, department_id, 
+      education, email, phone, 
+      qq_number, address, post, 
+      birth_date, nation, major, 
+      hobby, remark, create_date
+      )
+    values (#{id,jdbcType=INTEGER}, #{staffName,jdbcType=VARCHAR}, #{idNumber,jdbcType=VARCHAR}, 
+      #{gender,jdbcType=CHAR}, #{positionId,jdbcType=INTEGER}, #{departmentId,jdbcType=INTEGER}, 
+      #{education,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, 
+      #{qqNumber,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, #{post,jdbcType=VARCHAR}, 
+      #{birthDate,jdbcType=VARCHAR}, #{nation,jdbcType=VARCHAR}, #{major,jdbcType=VARCHAR}, 
+      #{hobby,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}
+      )
+  </insert>
+    <insert id="insertSelective" parameterType="com.company.csi.pojo.Staff">
+        insert into staff
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="staffName != null">
+                staff_name,
+            </if>
+            <if test="idNumber != null">
+                id_number,
+            </if>
+            <if test="gender != null">
+                gender,
+            </if>
+            <if test="positionId != null">
+                position_id,
+            </if>
+            <if test="departmentId != null">
+                department_id,
+            </if>
+            <if test="education != null">
+                education,
+            </if>
+            <if test="email != null">
+                email,
+            </if>
+            <if test="phone != null">
+                phone,
+            </if>
+            <if test="qqNumber != null">
+                qq_number,
+            </if>
+            <if test="address != null">
+                address,
+            </if>
+            <if test="post != null">
+                post,
+            </if>
+            <if test="birthDate != null">
+                birth_date,
+            </if>
+            <if test="nation != null">
+                nation,
+            </if>
+            <if test="major != null">
+                major,
+            </if>
+            <if test="hobby != null">
+                hobby,
+            </if>
+            <if test="remark != null">
+                remark,
+            </if>
+            <if test="createDate != null">
+                create_date,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="staffName != null">
+                #{staffName,jdbcType=VARCHAR},
+            </if>
+            <if test="idNumber != null">
+                #{idNumber,jdbcType=VARCHAR},
+            </if>
+            <if test="gender != null">
+                #{gender,jdbcType=CHAR},
+            </if>
+            <if test="positionId != null">
+                #{positionId,jdbcType=INTEGER},
+            </if>
+            <if test="departmentId != null">
+                #{departmentId,jdbcType=INTEGER},
+            </if>
+            <if test="education != null">
+                #{education,jdbcType=VARCHAR},
+            </if>
+            <if test="email != null">
+                #{email,jdbcType=VARCHAR},
+            </if>
+            <if test="phone != null">
+                #{phone,jdbcType=VARCHAR},
+            </if>
+            <if test="qqNumber != null">
+                #{qqNumber,jdbcType=VARCHAR},
+            </if>
+            <if test="address != null">
+                #{address,jdbcType=VARCHAR},
+            </if>
+            <if test="post != null">
+                #{post,jdbcType=VARCHAR},
+            </if>
+            <if test="birthDate != null">
+                #{birthDate,jdbcType=VARCHAR},
+            </if>
+            <if test="nation != null">
+                #{nation,jdbcType=VARCHAR},
+            </if>
+            <if test="major != null">
+                #{major,jdbcType=VARCHAR},
+            </if>
+            <if test="hobby != null">
+                #{hobby,jdbcType=VARCHAR},
+            </if>
+            <if test="remark != null">
+                #{remark,jdbcType=VARCHAR},
+            </if>
+            <if test="createDate != null">
+                #{createDate,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+    <select id="countByExample" parameterType="com.company.csi.pojo.StaffExample" resultType="java.lang.Long">
+        select count(*) from staff
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </select>
+    <update id="updateByExampleSelective" parameterType="map">
+        update staff
+        <set>
+            <if test="record.id != null">
+                id = #{record.id,jdbcType=INTEGER},
+            </if>
+            <if test="record.staffName != null">
+                staff_name = #{record.staffName,jdbcType=VARCHAR},
+            </if>
+            <if test="record.idNumber != null">
+                id_number = #{record.idNumber,jdbcType=VARCHAR},
+            </if>
+            <if test="record.gender != null">
+                gender = #{record.gender,jdbcType=CHAR},
+            </if>
+            <if test="record.positionId != null">
+                position_id = #{record.positionId,jdbcType=INTEGER},
+            </if>
+            <if test="record.departmentId != null">
+                department_id = #{record.departmentId,jdbcType=INTEGER},
+            </if>
+            <if test="record.education != null">
+                education = #{record.education,jdbcType=VARCHAR},
+            </if>
+            <if test="record.email != null">
+                email = #{record.email,jdbcType=VARCHAR},
+            </if>
+            <if test="record.phone != null">
+                phone = #{record.phone,jdbcType=VARCHAR},
+            </if>
+            <if test="record.qqNumber != null">
+                qq_number = #{record.qqNumber,jdbcType=VARCHAR},
+            </if>
+            <if test="record.address != null">
+                address = #{record.address,jdbcType=VARCHAR},
+            </if>
+            <if test="record.post != null">
+                post = #{record.post,jdbcType=VARCHAR},
+            </if>
+            <if test="record.birthDate != null">
+                birth_date = #{record.birthDate,jdbcType=VARCHAR},
+            </if>
+            <if test="record.nation != null">
+                nation = #{record.nation,jdbcType=VARCHAR},
+            </if>
+            <if test="record.major != null">
+                major = #{record.major,jdbcType=VARCHAR},
+            </if>
+            <if test="record.hobby != null">
+                hobby = #{record.hobby,jdbcType=VARCHAR},
+            </if>
+            <if test="record.remark != null">
+                remark = #{record.remark,jdbcType=VARCHAR},
+            </if>
+            <if test="record.createDate != null">
+                create_date = #{record.createDate,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByExample" parameterType="map">
+        update staff
+        set id = #{record.id,jdbcType=INTEGER},
+        staff_name = #{record.staffName,jdbcType=VARCHAR},
+        id_number = #{record.idNumber,jdbcType=VARCHAR},
+        gender = #{record.gender,jdbcType=CHAR},
+        position_id = #{record.positionId,jdbcType=INTEGER},
+        department_id = #{record.departmentId,jdbcType=INTEGER},
+        education = #{record.education,jdbcType=VARCHAR},
+        email = #{record.email,jdbcType=VARCHAR},
+        phone = #{record.phone,jdbcType=VARCHAR},
+        qq_number = #{record.qqNumber,jdbcType=VARCHAR},
+        address = #{record.address,jdbcType=VARCHAR},
+        post = #{record.post,jdbcType=VARCHAR},
+        birth_date = #{record.birthDate,jdbcType=VARCHAR},
+        nation = #{record.nation,jdbcType=VARCHAR},
+        major = #{record.major,jdbcType=VARCHAR},
+        hobby = #{record.hobby,jdbcType=VARCHAR},
+        remark = #{record.remark,jdbcType=VARCHAR},
+        create_date = #{record.createDate,jdbcType=TIMESTAMP}
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByPrimaryKeySelective" parameterType="com.company.csi.pojo.Staff">
+        update staff
+        <set>
+            <if test="staffName != null">
+                staff_name = #{staffName,jdbcType=VARCHAR},
+            </if>
+            <if test="idNumber != null">
+                id_number = #{idNumber,jdbcType=VARCHAR},
+            </if>
+            <if test="gender != null">
+                gender = #{gender,jdbcType=CHAR},
+            </if>
+            <if test="positionId != null">
+                position_id = #{positionId,jdbcType=INTEGER},
+            </if>
+            <if test="departmentId != null">
+                department_id = #{departmentId,jdbcType=INTEGER},
+            </if>
+            <if test="education != null">
+                education = #{education,jdbcType=VARCHAR},
+            </if>
+            <if test="email != null">
+                email = #{email,jdbcType=VARCHAR},
+            </if>
+            <if test="phone != null">
+                phone = #{phone,jdbcType=VARCHAR},
+            </if>
+            <if test="qqNumber != null">
+                qq_number = #{qqNumber,jdbcType=VARCHAR},
+            </if>
+            <if test="address != null">
+                address = #{address,jdbcType=VARCHAR},
+            </if>
+            <if test="post != null">
+                post = #{post,jdbcType=VARCHAR},
+            </if>
+            <if test="birthDate != null">
+                birth_date = #{birthDate,jdbcType=VARCHAR},
+            </if>
+            <if test="nation != null">
+                nation = #{nation,jdbcType=VARCHAR},
+            </if>
+            <if test="major != null">
+                major = #{major,jdbcType=VARCHAR},
+            </if>
+            <if test="hobby != null">
+                hobby = #{hobby,jdbcType=VARCHAR},
+            </if>
+            <if test="remark != null">
+                remark = #{remark,jdbcType=VARCHAR},
+            </if>
+            <if test="createDate != null">
+                create_date = #{createDate,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.company.csi.pojo.Staff">
+    update staff
+    set staff_name = #{staffName,jdbcType=VARCHAR},
+      id_number = #{idNumber,jdbcType=VARCHAR},
+      gender = #{gender,jdbcType=CHAR},
+      position_id = #{positionId,jdbcType=INTEGER},
+      department_id = #{departmentId,jdbcType=INTEGER},
+      education = #{education,jdbcType=VARCHAR},
+      email = #{email,jdbcType=VARCHAR},
+      phone = #{phone,jdbcType=VARCHAR},
+      qq_number = #{qqNumber,jdbcType=VARCHAR},
+      address = #{address,jdbcType=VARCHAR},
+      post = #{post,jdbcType=VARCHAR},
+      birth_date = #{birthDate,jdbcType=VARCHAR},
+      nation = #{nation,jdbcType=VARCHAR},
+      major = #{major,jdbcType=VARCHAR},
+      hobby = #{hobby,jdbcType=VARCHAR},
+      remark = #{remark,jdbcType=VARCHAR},
+      create_date = #{createDate,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

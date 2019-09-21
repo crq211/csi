@@ -1,0 +1,357 @@
+/* 登录页面的样式 */
+div.loginSmallDiv {
+    /* 背景颜色 */
+    background-color: #9bbad2;
+    /* 绝对定位 相当于该元素被从原文档中删除了 */
+    position: absolute;
+    /* 距离左边 */
+    left: 500px;
+    /* 距离顶部 */
+    top: 120px;
+    /* 宽度 */
+    width: 350px;
+    /* 长度 */
+    height: 330px;
+    /* 元素内边距，指的是元素里的内容与边框之间的距离  上 右 下 左,依顺时针的方向依次赋值  */
+    padding: 40px 25px 30px 25px;
+}
+
+div.loginErrorMessageDiv {
+    /*width: 300px;*/
+    /*position: absolute;*/
+    /*top: 10px;*/
+    display: none;
+    /*text-align: center;*/
+}
+
+div.loginErrorMessageDiv div.alert {
+    padding: 5px !important;
+}
+
+div.csiText {
+    color: #143c2c;
+    font-size: 20px;
+    font-weight: bold;
+    text-align: center;
+}
+
+div.loginInput {
+    /*border: 1px solid #CBCBCB;*/
+    /* 元素外边距，指的是元素边框和元素边框之间的距离 */
+    margin: 20px 0px;
+}
+
+div.loginInput input {
+    border: 1px solid transparent;
+    width: 244px;
+    height: 30px;
+    position: relative;
+    left: 6px;
+    top: 6px;
+}
+
+/* 使头像和输入框在同一行 */
+div.loginInput span, div.loginInput input {
+    /* 用到内联-块级 inline-block，处于同一行，同时还能指定大小 */
+    display: inline-block;
+}
+
+div.loginInput span.loginInputIcon {
+    /*margin: 0px;*/
+    /*background-color: #CBCBCB;*/
+    /*width: 35px;*/
+    /*height: 35px;*/
+}
+
+/* 头像和钥匙 */
+span.loginInputIcon span.glyphicon {
+    width: 35px;
+    height: 35px;
+    font-size: 22px;
+    position: relative;
+    left: 9px;
+    top: 9px;
+    color: #606060;
+}
+
+button.blueButton {
+    color: white;
+    background-color: #2b669a;
+    font-size: 14px;
+    font-weight: bold;
+    width: 145px;
+}
+
+div.loginDDD {
+    float: left;
+}
+
+div.blueDDD {
+    float: right;
+}
+
+div.rePassword {
+    left: 44px;
+}
+
+/* 导航条样式 */
+nav.topCSI {
+    background-color: rgba(11, 27, 41, 0.85);
+    border-color: #192a3c;
+}
+
+nav.topCSI span, nav.topCSI a {
+    color: rgba(245, 245, 245, 0.91);
+    margin: 5px 10px 5px 10px;
+}
+
+/* 左侧卡片样式 */
+div.categoryWithCarousel {
+    width: 100%;
+    position: absolute;
+}
+
+div.categoryWithCarousel div.categoryMenu {
+    width: 200px;
+    height: 610px;
+    background-color: #192a3c;
+    position: fixed;
+    left: 0;
+    top: 50px;
+    z-index: 1;
+}
+
+/* 鼠标移进去每个div */
+div.categoryWithCarousel div.eachCategory:hover {
+    /*background-color: #5fc3ff;*/
+    background-color: rgba(41, 166, 203, 0.66);
+    /* 鼠标变化 */
+    cursor: pointer;
+}
+
+div.categoryWithCarousel div.eachCategory span {
+    color: rgba(245, 245, 245, 0.91);
+    margin: 12px 3px 12px 10px;
+}
+
+/* 每一个div */
+div.categoryWithCarousel div.eachCategory {
+    line-height: 30px;
+    padding-left: 10px;
+    font-size: 15px;
+}
+
+/* 向右箭头 */
+div.eachCategory span.glyphicon-chevron-right {
+    font-size: 10px;
+    position: relative;
+    left: 40px;
+    top: 2px;
+    color: #606060;
+}
+
+div.categoryMenu div.cardDivs div span {
+    margin-left: 42px;
+}
+
+div.categoryMenu div.cardDivs {
+    display: none;
+}
+
+div.cardDivs div.eachCategory {
+    background-color: rgba(23, 56, 85, 0.85);
+}
+
+/* 右侧菜单显示样式 */
+div.menuDiv {
+    width: 1140px;
+    height: 575px;
+    /* 用这个定位 */
+    position: fixed;
+    left: 213px;
+    top: 50px;
+}
+
+th {
+    text-align: center;
+}
+
+td {
+    text-align: center;
+    color: #2b669a;
+}
+
+div.titleDiv {
+    font-size: 18px;
+}
+
+div.outDiv {
+    border: 1px solid rgba(100, 149, 237, 0.75);
+    height: 545px;
+    margin-top: 6px;
+}
+
+div.placeDiv {
+    background-color: rgba(47, 197, 242, 0.49);
+    height: 32px;
+    padding-left: 80px;
+    padding-top: 5px;
+}
+
+div.searchDiv {
+    border: 1px solid silver;
+    margin: 6px 8px 10px 8px;
+    /*background-color: rgba(47, 197, 242, 0.49);*/
+    padding-left: 15px;
+    padding-top: 5px;
+    height: 40px;
+}
+
+/* 员工查询的搜索框 */
+div#staffSelectDiv div.searchDiv {
+    border: 1px solid silver;
+    margin: 6px 8px 10px 8px;
+    padding-left: 15px;
+    padding-top: 5px;
+    height: 60px;
+}
+
+div#staffSelectDiv div.searchDiv span.ss, div#staffSelectDiv div.searchDiv div.sss {
+    display: inline-block;
+}
+
+div.dataDiv {
+    /*border: 0px solid silver;*/
+    margin: 10px 8px 2px 8px;
+}
+
+div.pageDiv {
+    /*margin-top: 20px;*/
+    text-align: center;
+    color: #28a4c9;
+}
+
+div.pageDiv div#page_jump, div.pageDiv div#page_info {
+    font-size: 15px;
+}
+
+div#departmentAddDiv label, div#departmentUpdateDiv label {
+    width: 120px;
+}
+
+div#positionAddDiv label, div#positionUpdateDiv label {
+    width: 120px;
+}
+
+div#noticeAddDiv label, div#noticeUpdateDiv label {
+    width: 120px;
+}
+
+div#downloadAddDiv label, div#downloadUpdateDiv label {
+    width: 120px;
+}
+
+
+/* 添加、修改员工div的样式 */
+/* 右边的 */
+div.dataDiv div.staffRightDiv {
+    position: fixed;
+    left: 700px;
+    top: 119px;
+}
+
+/* 左边的label */
+div.staffLeftDiv label {
+    width: 150px;
+}
+
+/* 右边的label */
+div.staffRightDiv label {
+    width: 150px;
+    top: 6px;
+}
+
+/* 右边的输入框 */
+div.staffRightDiv input {
+    width: 244px;
+    position: relative;
+    top: 6px;
+}
+
+/* 校验提示 增加、修改两个div一样 */
+div#staffAddDiv span.help-block, div#staffUpdateDiv span.help-block {
+    margin-top: 1px;
+    /* 绝对定位，不会动态 */
+    position: absolute;
+}
+
+/* 右边的校验 增加、修改两个div一样 */
+div#staffAddDiv div.staffRightDiv span.help-block, div#staffUpdateDiv div.staffRightDiv span.help-block {
+    width: 200px;
+    margin-top: 5px;
+}
+
+/* 距离下面的div的距离 */
+div.form-group {
+    margin-bottom: 24px;
+}
+
+/* 预览公告模态窗口div */
+div#previewNoticeModal label.titleLabel {
+    font-size: 30px;
+    height: 30px;
+}
+
+div#previewNoticeModal label.messageLabel {
+    color: rgba(0, 0, 0, 0.76);
+    font-size: 16px;
+    /* 不加粗 */
+    font-weight: normal;
+}
+
+span.glyphicon-cog:hover {
+    /* 鼠标变化 */
+    cursor: pointer;
+}
+
+/* config */
+/*span.desc{*/
+    /*margin-left:20px;*/
+    /*color:gray;*/
+/*}*/
+/*div.workingRoom{*/
+    /*margin:200px auto;*/
+    /*width:600px;*/
+    /*position:relative;*/
+    /*background-color: black;*/
+    /*border: 2px;*/
+/*}*/
+/*div.loginDiv{*/
+    /*text-align: left;*/
+/*}*/
+/*div.errorInfo{*/
+    /*color:red;*/
+    /*font-size:0.65em;*/
+/*}*/
+/*div.workingRoom td{*/
+    /*border:1px solid black;*/
+/*}*/
+/*div.workingRoom table{*/
+    /*border-collapse:collapse;*/
+    /*width:100%;*/
+/*}*/
+
+/*div.workingRoom div.menu{*/
+    /*position:absolute;*/
+    /*left:160px;*/
+    /*top:20px;*/
+/*}*/
+/*div.workingRoom div.menu a{*/
+    /*display:block;*/
+    /*margin-top:20px;*/
+/*}*/
+
+/*div.workingRoom div.addOrEdit{*/
+    /*margin:20px;*/
+    /*text-align:center;*/
+/*}*/
