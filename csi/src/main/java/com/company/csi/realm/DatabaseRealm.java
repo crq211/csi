@@ -59,8 +59,10 @@ public class DatabaseRealm extends AuthorizingRealm {
         UsernamePasswordToken t = (UsernamePasswordToken) token;
         String userName = token.getPrincipal().toString();
         System.out.println("输入的账号: " + userName);
+
         String password = new String(t.getPassword());
         System.out.println("输入的密码: " + password);
+
         //获取用户，获取盐，加密输入的密码
         User user = userService.getByUserName(userName);
         String salt = user.getSalt();

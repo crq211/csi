@@ -41,7 +41,7 @@ public class RoleController {
         model.addAttribute("rs", roleList);
 
         //每个角色各自拥有的权限
-        Map<Role, List<Permission>> role_permissions = new HashMap<Role, List<Permission>>();
+        Map<Role, List<Permission>> role_permissions = new HashMap<>();
         for (Role role : roleList) {
             List<Permission> permissionList = permissionService.list(role);
             role_permissions.put(role, permissionList);

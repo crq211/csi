@@ -25,6 +25,7 @@ public class FaceController {
 
     /**
      * 跳转到人脸注册页面
+     *
      * @return
      */
     @RequestMapping(value = "/faceRegister", method = RequestMethod.GET)
@@ -34,10 +35,11 @@ public class FaceController {
 
     /**
      * 跳转到人脸识别页面
+     *
      * @return
      */
     @RequestMapping(value = "/faceLogin", method = RequestMethod.GET)
-    public String login()    {
+    public String login() {
         return "face/login";
     }
 
@@ -127,7 +129,7 @@ public class FaceController {
      * 人脸登录
      */
     @RequestMapping(value = "/faceLogin", produces = "application/json; charset=utf-8",
-                    method = RequestMethod.POST)
+            method = RequestMethod.POST)
     @ResponseBody
     public String faceLogin(HttpServletRequest request, String base) {
         String APP_ID = "17073172";

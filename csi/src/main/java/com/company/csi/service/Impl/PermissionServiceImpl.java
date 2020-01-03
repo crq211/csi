@@ -61,7 +61,7 @@ public class PermissionServiceImpl implements PermissionService {
      */
     @Override
     public List<Permission> list(Role role) {
-        List<Permission> permissionList = new ArrayList<Permission>();
+        List<Permission> permissionList = new ArrayList<>();
         RolePermissionExample example = new RolePermissionExample();
         example.createCriteria().andRoleIdEqualTo(role.getId());
         List<RolePermission> rolePermissionList = rolePermissionMapper.selectByExample(example);
