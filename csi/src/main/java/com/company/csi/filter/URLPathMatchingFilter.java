@@ -16,7 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import com.company.csi.service.PermissionService;
 
 /**
- * 权限拦截器
+ * 权限过滤器
  */
 public class URLPathMatchingFilter extends AccessControlFilter {
 
